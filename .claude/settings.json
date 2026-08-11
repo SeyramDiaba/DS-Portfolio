@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/StephenDiaba/Downloads/**)",
+      "Bash(python \"c:/Users/StephenDiaba/Desktop/DS Portfolio/DS-Portfolio/scripts/remove_bg.py\" \"C:/Users/StephenDiaba/Downloads/Untitled design.png\" \"c:/Users/StephenDiaba/Desktop/DS Portfolio/DS-Portfolio/assets/portrait.png\")"
+    ]
+  }
+}

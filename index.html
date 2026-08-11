@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stephen Diaba — Data Scientist</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <script>
+    (function () {
+      var saved = localStorage.getItem("theme");
+      var theme = saved || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      document.documentElement.setAttribute("data-theme", theme);
+    })();
+  </script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="nav-links" id="nav-links">
+        <a href="#about">About Me</a>
+        <a href="#projects">Portfolio</a>
+        <a href="#cooperation">Cooperation</a>
+      </nav>
+
+      <div class="logo">S</div>
+
+      <div class="header-actions">
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" aria-pressed="false">
+          <span class="icon-sun" aria-hidden="true">☀️</span>
+          <span class="icon-moon" aria-hidden="true">🌙</span>
+        </button>
+        <a href="#contact" class="btn btn-contact">Contact Me</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero container" id="about">
+      <div class="hero-text">
+        <h1>My name<br />is Stephen</h1>
+        <p class="hero-sub">I am a Data Scientist with more than 5 years of experience</p>
+        <a href="#contact" class="btn btn-primary">Hire Me</a>
+
+        <div class="skill-tags">
+          <span class="tag tag-dark">Python</span>
+          <span class="tag tag-orange">SQL</span>
+          <span class="tag tag-dark">Microsoft Power Platform</span>
+          <span class="tag tag-light">AI / Deep Learning</span>
+        </div>
+      </div>
+
+      <div class="hero-portrait">
+        <div class="portrait-shape"></div>
+        <img src="assets/portrait.png" alt="Portrait of Stephen Diaba" class="portrait-img" />
+        <div class="experience-badge">
+          <span class="exp-number">5+</span>
+          <span class="exp-label">years experience</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="projects container" id="projects">
+      <div class="projects-header">
+        <h2>Latest Projects</h2>
+        <a href="#" class="all-projects">All projects</a>
+      </div>
+
+      <div class="project-grid">
+        <article class="project-card">
+          <div class="project-thumb project-thumb-1">
+            <span class="project-number">01</span>
+          </div>
+          <h3 class="project-title">Project One</h3>
+        </article>
+
+        <article class="project-card">
+          <div class="project-thumb project-thumb-2">
+            <span class="project-number">02</span>
+          </div>
+          <h3 class="project-title">Project Two</h3>
+        </article>
+
+        <article class="project-card">
+          <div class="project-thumb project-thumb-3">
+            <span class="project-number">03</span>
+          </div>
+          <h3 class="project-title">Project Three</h3>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
