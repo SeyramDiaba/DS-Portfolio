@@ -58,6 +58,16 @@ const revealObserver = new IntersectionObserver(
 
 document.querySelectorAll(".reveal").forEach((el) => revealObserver.observe(el));
 
+const messageField = document.getElementById("message");
+
+const autoGrow = () => {
+  messageField.style.height = "auto";
+  messageField.style.height = `${messageField.scrollHeight}px`;
+};
+
+messageField.addEventListener("input", autoGrow);
+autoGrow();
+
 const contactForm = document.getElementById("contact-form");
 const formStatus = document.getElementById("form-status");
 
