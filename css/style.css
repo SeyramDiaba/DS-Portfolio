@@ -408,15 +408,19 @@ button:focus-visible {
 }
 
 .project-thumb-1 {
-  background: var(--surface);
+  background-color: var(--surface);
+  background-image: url("../assets/projects/quota-tool.png");
+  background-position: top left;
 }
 
 .project-thumb-2 {
-  background: var(--peach);
+  background-color: var(--peach);
+  background-image: url("../assets/projects/data-hub.webp");
 }
 
 .project-thumb-3 {
-  background: var(--surface-2);
+  background-color: var(--surface-2);
+  background-image: url("../assets/projects/geognn.jpg");
 }
 
 .project-number {
@@ -436,6 +440,13 @@ button:focus-visible {
   font-size: 16px;
   font-weight: 600;
   letter-spacing: -0.01em;
+  margin: 0 0 6px;
+}
+
+.project-desc {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-muted);
   margin: 0;
 }
 
