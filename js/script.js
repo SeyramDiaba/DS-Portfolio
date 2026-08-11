@@ -40,3 +40,36 @@ const revealObserver = new IntersectionObserver(
 );
 
 document.querySelectorAll(".reveal").forEach((el) => revealObserver.observe(el));
+
+const contactForm = document.getElementById("contact-form");
+const formStatus = document.getElementById("form-status");
+
+contactForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+
+  const submitBtn = contactForm.querySelector("button[type='submit']");
+  submitBtn.disabled = true;
+  formStatus.className = "form-status";
+  formStatus.textContent = "Sending…";
+
+  try {
+    const response = await fetch(contactForm.action, {
+      method: "POST",
+      body: new FormData(contactForm),
+      headers: { Accept: "application/json" },
+    });
+
+    if (!response.ok) {
+      throw new Error("Form submission failed");
+    }
+
+    contactForm.classList.add("is-sent");
+    formStatus.className = "form-status success";
+    formStatus.textContent = "Message sent — I'll get back to you soon.";
+  } catch (err) {
+    formStatus.className = "form-status error";
+    formStatus.innerHTML =
+      'Something went wrong. Please email me directly at <a href="mailto:diabaseyram@gmail.com">diabaseyram@gmail.com</a>.';
+    submitBtn.disabled = false;
+  }
+});
