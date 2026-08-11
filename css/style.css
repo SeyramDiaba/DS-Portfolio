@@ -420,7 +420,7 @@ button:focus-visible {
 
 .project-thumb-3 {
   background-color: var(--surface-2);
-  background-image: url("../assets/projects/geognn.jpg");
+  background-image: url("../assets/projects/geognn.png");
 }
 
 .project-number {
