@@ -17,3 +17,26 @@ themeToggle.addEventListener("click", () => {
   localStorage.setItem("theme", next);
   themeToggle.setAttribute("aria-pressed", String(next === "dark"));
 });
+
+const siteHeader = document.querySelector(".site-header");
+
+const updateHeaderScrolled = () => {
+  siteHeader.classList.toggle("scrolled", window.scrollY > 4);
+};
+
+updateHeaderScrolled();
+window.addEventListener("scroll", updateHeaderScrolled, { passive: true });
+
+const revealObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("is-visible");
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  },
+  { threshold: 0.2 }
+);
+
+document.querySelectorAll(".reveal").forEach((el) => revealObserver.observe(el));
