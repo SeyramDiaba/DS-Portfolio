@@ -49,6 +49,46 @@
   }
 }
 
+/* ---------- "Let's play" arrow ---------- */
+
+.game-arrow {
+  position: fixed;
+  right: 130px;
+  bottom: 100px;
+  z-index: 59;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  color: var(--orange);
+  pointer-events: none;
+  animation: game-arrow-wiggle 3.2s ease-in-out infinite;
+}
+
+.game-arrow-text {
+  font-family: var(--font);
+  font-style: italic;
+  font-weight: 700;
+  font-size: 17px;
+  color: var(--text);
+  transform: rotate(-4deg);
+  margin-bottom: 2px;
+}
+
+.game-arrow svg {
+  width: 60px;
+  height: 74px;
+}
+
+@keyframes game-arrow-wiggle {
+  0%,
+  100% {
+    transform: rotate(-3deg) translateY(0);
+  }
+  50% {
+    transform: rotate(2deg) translateY(-4px);
+  }
+}
+
 /* ---------- Modal backdrop ---------- */
 
 .game-modal-backdrop {
@@ -235,6 +275,12 @@ body.modal-open {
 }
 
 /* ---------- Responsive ---------- */
+
+@media (max-width: 860px) {
+  .game-arrow {
+    display: none;
+  }
+}
 
 @media (max-width: 420px) {
   .game-sticker span:not(.game-sticker-emoji) {
