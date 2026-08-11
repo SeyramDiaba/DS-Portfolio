@@ -1,9 +1,26 @@
 const hamburger = document.getElementById("hamburger");
 const navLinks = document.getElementById("nav-links");
 
+const closeNav = () => {
+  navLinks.classList.remove("open");
+  hamburger.setAttribute("aria-expanded", "false");
+};
+
 hamburger.addEventListener("click", () => {
   const isOpen = navLinks.classList.toggle("open");
   hamburger.setAttribute("aria-expanded", String(isOpen));
+});
+
+navLinks.querySelectorAll("a").forEach((link) => link.addEventListener("click", closeNav));
+
+document.addEventListener("click", (event) => {
+  if (
+    navLinks.classList.contains("open") &&
+    !navLinks.contains(event.target) &&
+    !hamburger.contains(event.target)
+  ) {
+    closeNav();
+  }
 });
 
 const themeToggle = document.getElementById("theme-toggle");
