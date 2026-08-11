@@ -1,6 +1,6 @@
 # DS-Portfolio
 
-Stephen Diaba's personal portfolio homepage — a static, single-page site built with plain HTML, CSS, and JavaScript (no build tooling required).
+Stephen Diaba's personal portfolio homepage, a static, single-page site built with plain HTML, CSS, and JavaScript (no build tooling required).
 
 ## Features
 

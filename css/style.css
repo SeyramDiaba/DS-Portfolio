@@ -707,8 +707,18 @@ button:focus-visible {
   transition: color 0.2s var(--ease);
 }
 
+.back-to-top svg {
+  width: 13px;
+  height: 13px;
+  transition: transform 0.2s var(--ease);
+}
+
 .back-to-top:hover {
   color: var(--text);
+}
+
+.back-to-top:hover svg {
+  transform: translateY(-2px);
 }
 
 .footer-main {

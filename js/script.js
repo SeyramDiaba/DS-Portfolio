@@ -65,7 +65,7 @@ contactForm.addEventListener("submit", async (event) => {
 
     contactForm.classList.add("is-sent");
     formStatus.className = "form-status success";
-    formStatus.textContent = "Message sent — I'll get back to you soon.";
+    formStatus.textContent = "Message sent, I'll get back to you soon.";
   } catch (err) {
     formStatus.className = "form-status error";
     formStatus.innerHTML =

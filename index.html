@@ -14,6 +14,7 @@
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PGNpcmNsZSBjeD0iMzIiIGN5PSIzMiIgcj0iMzIiIGZpbGw9IiMxZDFkMWYiLz48dGV4dCB4PSIzMiIgeT0iNDMiIGZvbnQtZmFtaWx5PSItYXBwbGUtc3lzdGVtLEJsaW5rTWFjU3lzdGVtRm9udCxIZWx2ZXRpY2EsQXJpYWwsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIzMiIgZm9udC13ZWlnaHQ9IjYwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+UzwvdGV4dD48L3N2Zz4=" />
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/game.css" />
   <script>
     (function () {
       var saved = localStorage.getItem("theme");
@@ -197,7 +198,10 @@
 
   <footer class="site-footer">
     <div class="container footer-top">
-      <a href="#top" class="back-to-top">Back to top <span aria-hidden="true">⌃</span></a>
+      <a href="#top" class="back-to-top">
+        Back to top
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 15 6-6 6 6"/></svg>
+      </a>
     </div>
 
     <div class="container footer-main">
@@ -234,6 +238,53 @@
     </div>
   </footer>
 
+  <button class="game-sticker" id="game-sticker" aria-haspopup="dialog" aria-controls="game-modal">
+    <span class="game-sticker-emoji" aria-hidden="true">🐛</span>
+    <span>Squish the Bugs!</span>
+  </button>
+
+  <div class="game-modal-backdrop" id="game-modal-backdrop" hidden>
+    <div class="game-modal" id="game-modal" role="dialog" aria-modal="true" aria-labelledby="game-modal-title">
+      <button class="game-close" id="game-close" aria-label="Close game">✕</button>
+
+      <h2 id="game-modal-title" class="game-title">
+        🐛 Bug Squasher
+        <span>Data Pipeline Defense</span>
+      </h2>
+
+      <div class="game-hud">
+        <div class="game-stat">
+          <span class="game-stat-label">Score</span>
+          <span class="game-stat-value" id="game-score">0</span>
+        </div>
+        <div class="game-stat">
+          <span class="game-stat-label">Time</span>
+          <span class="game-stat-value" id="game-timer">30</span>
+        </div>
+      </div>
+
+      <div class="game-canvas-wrap">
+        <canvas id="game-canvas" width="380" height="520" aria-label="Bug squashing game area"></canvas>
+
+        <div class="game-overlay" id="game-start-screen">
+          <p class="game-overlay-text">
+            Data packets are flowing into the pipeline. Squish the flashing red bugs before they
+            reach the database, but don't hit the green data packets!
+          </p>
+          <button class="btn btn-primary" id="game-start-btn">Start Game</button>
+        </div>
+
+        <div class="game-overlay" id="game-end-screen" hidden>
+          <p class="game-overlay-label">Final Score</p>
+          <p class="game-final-score" id="game-final-score">0</p>
+          <p class="game-rating" id="game-rating">Junior Intern</p>
+          <button class="btn btn-primary" id="game-restart-btn">Play Again</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script src="js/script.js"></script>
+  <script src="js/game.js"></script>
 </body>
 </html>
