@@ -27,12 +27,37 @@ const themeToggle = document.getElementById("theme-toggle");
 
 themeToggle.setAttribute("aria-pressed", String(document.documentElement.getAttribute("data-theme") === "dark"));
 
-themeToggle.addEventListener("click", () => {
-  const isDark = document.documentElement.getAttribute("data-theme") === "dark";
-  const next = isDark ? "light" : "dark";
+const applyTheme = (next) => {
   document.documentElement.setAttribute("data-theme", next);
   localStorage.setItem("theme", next);
   themeToggle.setAttribute("aria-pressed", String(next === "dark"));
+};
+
+const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+themeToggle.addEventListener("click", (event) => {
+  const isDark = document.documentElement.getAttribute("data-theme") === "dark";
+  const next = isDark ? "light" : "dark";
+
+  if (!document.startViewTransition || prefersReducedMotion) {
+    applyTheme(next);
+    return;
+  }
+
+  const { clientX, clientY } = event;
+  const radius = Math.hypot(
+    Math.max(clientX, window.innerWidth - clientX),
+    Math.max(clientY, window.innerHeight - clientY)
+  );
+
+  const transition = document.startViewTransition(() => applyTheme(next));
+
+  transition.ready.then(() => {
+    document.documentElement.animate(
+      { clipPath: [`circle(0px at ${clientX}px ${clientY}px)`, `circle(${radius}px at ${clientX}px ${clientY}px)`] },
+      { duration: 500, easing: "ease-in-out", pseudoElement: "::view-transition-new(root)" }
+    );
+  });
 });
 
 const siteHeader = document.querySelector(".site-header");
@@ -57,6 +82,63 @@ const revealObserver = new IntersectionObserver(
 );
 
 document.querySelectorAll(".reveal").forEach((el) => revealObserver.observe(el));
+
+const spySections = ["about", "projects", "cooperation", "contact"]
+  .map((id) => document.getElementById(id))
+  .filter(Boolean);
+
+const spyObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      const id = entry.target.id;
+      document.querySelectorAll(`.nav-links a`).forEach((link) => {
+        link.classList.toggle("active", link.getAttribute("href") === `#${id}`);
+      });
+    });
+  },
+  { rootMargin: "-45% 0px -45% 0px" }
+);
+
+spySections.forEach((section) => spyObserver.observe(section));
+
+const expCount = document.getElementById("exp-count");
+const expTarget = 5;
+
+const countObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      countObserver.unobserve(entry.target);
+
+      if (prefersReducedMotion) {
+        expCount.textContent = String(expTarget);
+        return;
+      }
+
+      let current = 0;
+      const step = () => {
+        current += 1;
+        expCount.textContent = String(current);
+        if (current < expTarget) requestAnimationFrame(() => setTimeout(step, 120));
+      };
+      step();
+    });
+  },
+  { threshold: 0.5 }
+);
+
+countObserver.observe(document.querySelector(".experience-badge"));
+
+if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+  document.querySelectorAll(".project-thumb, .client-card, .contact-card").forEach((card) => {
+    card.addEventListener("pointermove", (event) => {
+      const rect = card.getBoundingClientRect();
+      card.style.setProperty("--spot-x", `${event.clientX - rect.left}px`);
+      card.style.setProperty("--spot-y", `${event.clientY - rect.top}px`);
+    });
+  });
+}
 
 const messageField = document.getElementById("message");
 
