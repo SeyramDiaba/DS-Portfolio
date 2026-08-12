@@ -23,6 +23,13 @@ document.addEventListener("click", (event) => {
   }
 });
 
+const backToTop = document.querySelector(".back-to-top");
+
+backToTop.addEventListener("click", (event) => {
+  event.preventDefault();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+
 const themeToggle = document.getElementById("theme-toggle");
 
 themeToggle.setAttribute("aria-pressed", String(document.documentElement.getAttribute("data-theme") === "dark"));
