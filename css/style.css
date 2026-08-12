@@ -44,6 +44,26 @@
 
 html {
   scroll-behavior: smooth;
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+  scrollbar-color: var(--surface-2) transparent;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--surface-2);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
 }
 
 #about,
@@ -76,6 +96,11 @@ body {
 a {
   text-decoration: none;
   color: inherit;
+}
+
+::selection {
+  background: var(--orange);
+  color: #fff;
 }
 
 a:focus-visible,
@@ -192,12 +217,34 @@ button:focus-visible {
 }
 
 .nav-links a {
+  position: relative;
   color: var(--text-muted);
   transition: color 0.2s var(--ease);
 }
 
 .nav-links a:hover {
   color: var(--text);
+}
+
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -6px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--orange);
+  transform: scaleX(0);
+  transition: transform 0.25s var(--ease);
+}
+
+.nav-links a.active {
+  color: var(--text);
+}
+
+.nav-links a.active::after {
+  transform: scaleX(1);
 }
 
 .nav-contact-link {
@@ -426,7 +473,26 @@ button:focus-visible {
   background-size: cover;
   background-position: center;
   box-shadow: var(--card-shadow);
+  overflow: hidden;
   transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease);
+}
+
+.project-thumb::before,
+.client-card::before,
+.contact-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle 200px at var(--spot-x, 50%) var(--spot-y, 50%), rgba(255, 106, 26, 0.18), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s var(--ease);
+  pointer-events: none;
+}
+
+.project-thumb:hover::before,
+.client-card:hover::before,
+.contact-card:hover::before {
+  opacity: 1;
 }
 
 .project-card:hover .project-thumb {
@@ -502,6 +568,8 @@ button:focus-visible {
 }
 
 .client-card {
+  position: relative;
+  overflow: hidden;
   width: 180px;
   height: 96px;
   background: #ffffff;
@@ -584,6 +652,8 @@ button:focus-visible {
 }
 
 .contact-card {
+  position: relative;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -893,6 +963,22 @@ button:focus-visible {
 
 .contact-methods .reveal:nth-child(4) {
   transition-delay: 0.24s;
+}
+
+/* ---------- Theme-toggle view transition ---------- */
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-new(root) {
+  z-index: 1;
+}
+
+::view-transition-old(root) {
+  z-index: 0;
 }
 
 @media (prefers-reduced-motion: reduce) {
