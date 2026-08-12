@@ -879,6 +879,10 @@ button:focus-visible {
   transition-delay: 0.24s;
 }
 
+.client-grid .reveal:nth-child(6) {
+  transition-delay: 0.3s;
+}
+
 .contact-methods .reveal:nth-child(2) {
   transition-delay: 0.08s;
 }
