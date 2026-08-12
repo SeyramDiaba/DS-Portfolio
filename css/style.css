@@ -931,9 +931,7 @@ button:focus-visible {
     flex-direction: column;
     gap: 4px;
     padding: 12px 24px 28px;
-    background: var(--header-bg);
-    backdrop-filter: saturate(180%) blur(20px);
-    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    background: var(--bg);
     border-bottom: 1px solid var(--header-border);
     box-shadow: var(--card-shadow);
   }
