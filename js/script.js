@@ -145,6 +145,31 @@ if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
       card.style.setProperty("--spot-y", `${event.clientY - rect.top}px`);
     });
   });
+
+  const cursorPlane = document.getElementById("cursor-plane");
+  const cursorPlaneSvg = cursorPlane.querySelector(".cursor-plane-svg");
+  const interactiveSelector = "a, button, input, textarea, select, [role='button']";
+  let lastX = null;
+  let lastY = null;
+
+  window.addEventListener("pointermove", (event) => {
+    const { clientX: x, clientY: y } = event;
+    cursorPlane.style.transform = `translate(${x - 14}px, ${y - 14}px)`;
+    cursorPlane.classList.toggle("is-visible", !event.target.closest(interactiveSelector));
+
+    if (lastX !== null) {
+      const dx = x - lastX;
+      const dy = y - lastY;
+      if (Math.hypot(dx, dy) > 1.5) {
+        const heading = Math.atan2(dy, dx) * (180 / Math.PI) + 90;
+        cursorPlaneSvg.style.setProperty("--plane-angle", `${heading}deg`);
+      }
+    }
+    lastX = x;
+    lastY = y;
+  });
+
+  document.addEventListener("pointerleave", () => cursorPlane.classList.remove("is-visible"));
 }
 
 const messageField = document.getElementById("message");
